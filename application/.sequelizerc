@@ -1,0 +1,10 @@
+"use strict";
+
+const path = require('path');
+
+module.exports = {
+  config: path.join(__dirname, 'src/data/postgres/config/config.js'),
+  'migrations-path': path.join(__dirname, 'src/data/postgres/migrations'),
+  'models-path': path.join(__dirname, 'src/data/postgres/models'),
+  'seeders-path': path.join(__dirname, 'src/data/postgres/seeders'),
+};
