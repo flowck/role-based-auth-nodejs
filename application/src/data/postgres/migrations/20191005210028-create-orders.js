@@ -4,9 +4,9 @@ module.exports = {
     return queryInterface.createTable("orders", {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       code: {
         type: Sequelize.UUID
@@ -21,7 +21,8 @@ module.exports = {
         type: Sequelize.DATE
       },
       status: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM("PAID", "UNPAID"),
+        defaultValue: "UNPAID"
       },
       customerName: {
         type: Sequelize.STRING

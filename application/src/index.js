@@ -14,12 +14,14 @@ const app = express();
 /**
  * Middlewares
  */
+// Allow external clients to make requests
 app.use(cors());
 app.use(bodyParser.json());
+// Enable http compression
 app.use(compression());
 
 /**
- * Routes
+ * Routing middleware
  */
 app.use("/api", routes);
 
