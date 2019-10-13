@@ -1,5 +1,7 @@
 # Role based auth
 
+[![Build Status](https://travis-ci.org/flowck/role-based-auth-nodejs.svg?branch=master)](https://travis-ci.org/flowck/role-based-auth-nodejs)
+
 An implementation of role based authentication using ```express.js``` and ```jsonwebtoken```.
 
 ## Context
