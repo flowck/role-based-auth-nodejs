@@ -8,6 +8,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const routes = require("./routes");
 const compression = require("compression");
+const validationErrors = require("./middlewares/expressValidationErrors");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(compression());
  * Routing middleware
  */
 app.use("/api", routes);
+app.use(validationErrors);
 
 /**
  * Listen the application to a port
