@@ -8,4 +8,5 @@ services:
   - postgresql
 
 before_script:
+  - npm i -g sequelize-cli
   - node tests/db.js
