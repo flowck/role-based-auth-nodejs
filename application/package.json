@@ -7,7 +7,8 @@
     "dev": "nodemon src/index.js",
     "p": "prettier --write 'src/**/*.js'",
     "p:w": "onchange 'src/**/*.js' -- prettier --write {{changed}}",
-    "test": "mocha"
+    "test": "mocha --recursive tests/**/*.spec.js",
+    "test:dev": "node tests/db.js; npm test"
   },
   "repository": {
     "type": "git",
