@@ -8,7 +8,7 @@ services:
   - postgresql
 
 before_script:
+  - psql -c 'create database rolebasedauth_test' -U postgres
   - npm i -g sequelize-cli
-  - sequelize db:create
   - sequelize db:migrate
   - sequelize db:seed:all
