@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - 10.16.3
+
+before_install: cd application
+
+services:
+  - postgresql
+
+before_script:
+  - node tests/db.js
