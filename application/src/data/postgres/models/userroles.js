@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         references: {
           model: "roles",
-          key: "idRole"
+          key: "id"
         }
       },
       idUser: {
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         references: {
           model: "users",
-          key: "idUser"
+          key: "id"
         }
       }
     },
