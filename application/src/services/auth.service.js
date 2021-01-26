@@ -1,7 +1,8 @@
 // Dependencies
+require("dotenv/config");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { SALT, JWT_SECRET } = require("../configs/config");
+const { SALT, JWT_SECRET } = process.env;
 
 // API messages
 const {
@@ -22,41 +23,29 @@ const Users = require("../data/postgres/models").users;
  */
 module.exports.auth = async (email, password) => {
   try {
-    if (email && password) {
-      const user = await Users.findOne({ where: { email } });
+    if (!email || !password) return Promise.resolve(AUTH_INVALID_DATA);
 
-      // Check if a user account was found
-      if (user) {
-        // Check user's password
-        const isPasswordValid = bcrypt.compareSync(
-          password,
-          user.dataValues.password
-        );
-        if (isPasswordValid) {
-          const { name, email } = user.dataValues;
-          // Generate token
-          const tokenPayload = { name, email };
-          const token = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: "2h" });
+    const user = await Users.findOne({ where: { email } });
 
-          // Remove important fields
-          delete user.dataValues.password;
+    // Check if a user account was found
+    if (!user) return Promise.resolve(AUTH_USER_NOT_FOUND);
 
-          return Promise.resolve({
-            token,
-            user: {
-              name,
-              email
-            }
-          });
-        } else {
-          return Promise.resolve(AUTH_INVALID_DATA);
-        }
-      } else {
-        return Promise.resolve(AUTH_USER_NOT_FOUND);
-      }
-    } else {
-      return Promise.resolve(AUTH_INVALID_DATA);
-    }
+    // Check user's password
+    const isPasswordValid = bcrypt.compareSync(
+      password,
+      user.dataValues.password
+    );
+
+    if (!isPasswordValid) return Promise.resolve(AUTH_INVALID_DATA);
+
+    const { name, email: _email } = user.dataValues;
+    const tokenPayload = { name, _email };
+    const token = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: "2h" });
+
+    // Remove important fields
+    delete user.dataValues.password;
+
+    return Promise.resolve({ token, user: { name, _email } });
   } catch (error) {
     return Promise.reject(AUTH_UNDEFINED_ERROR);
   }

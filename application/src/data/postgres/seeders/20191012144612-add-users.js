@@ -1,8 +1,9 @@
 "use strict";
 
+require("dotenv/config");
 const uuid = require("uuidv4").default;
 const bcrypt = require("bcryptjs");
-const config = require("../../../configs/config.js");
+const { SALT } = process.env;
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -13,7 +14,7 @@ module.exports = {
           id: uuid(),
           name: "Lionel Messi",
           email: "lionel.messi@gmail.com",
-          password: bcrypt.hashSync("barcelona", config.SALT),
+          password: bcrypt.hashSync("barcelona", SALT),
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -21,7 +22,7 @@ module.exports = {
           id: uuid(),
           name: "Cristiano Ronaldo",
           email: "cr7@gmail.com",
-          password: bcrypt.hashSync("LaVecchiaSignora", config.SALT),
+          password: bcrypt.hashSync("LaVecchiaSignora", SALT),
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -29,7 +30,7 @@ module.exports = {
           id: uuid(),
           name: "Neymar Jr.",
           email: "nj@gmail.com",
-          password: bcrypt.hashSync("sequeda", config.SALT),
+          password: bcrypt.hashSync("sequeda", SALT),
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -37,7 +38,7 @@ module.exports = {
           id: uuid(),
           name: "Hazard",
           email: "hazard10@gmail.com",
-          password: bcrypt.hashSync("hallaMadrid", config.SALT),
+          password: bcrypt.hashSync("hallaMadrid", SALT),
           createdAt: new Date(),
           updatedAt: new Date()
         }
