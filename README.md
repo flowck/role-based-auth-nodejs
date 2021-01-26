@@ -4,6 +4,30 @@
 
 An implementation of role based authentication using ```express.js``` and ```jsonwebtoken```.
 
+## How to run
+
+1 - After cloning this respository to your computer, open the terminal and navigate to the root: 
+
+    cd src
+
+2 - Install Nodejs dependencies
+
+    npm install
+
+3 - Assuming you have an instance of PostgreSQL installed in your computer, create a new database by running the following commands:
+
+    sequelize db:create
+    sequelize db:migrate
+    sequelize db:seed:all
+
+4 - Start the API by running:
+
+    npm run dev
+
+5 - Start ES-Lint and Prettier on a different tab of your terminal
+
+    npm run dev
+
 ## Context
 
 Information is the power of every application and therefore we must pay anttention on only expose the information that the user needs and nothing more.
